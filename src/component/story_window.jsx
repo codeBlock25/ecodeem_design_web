@@ -2,6 +2,7 @@ import { AnimatePresence, motion } from "framer-motion";
 import "../styles/components/story_window.scss";
 import { ChevronBackOutline, ChevronForwardOutline } from "react-ionicons";
 import { Component } from "react";
+import { cloneDeep } from "lodash";
 
 export const FileType = {
   image: 0,
@@ -33,7 +34,30 @@ class StoryWindow extends Component {
       viewed: [],
       count: 0,
     };
+    this.handleNext = () => {
+      if (this.state.viewed.length >= this.state.storyContent.length) {
+        return;
+      }
+      this.setState({
+        count: this.state.count + 1,
+        viewed: [
+          ...this.state.viewed,
+          this.state.storyContent[this.state.count + 1]?.id ?? "",
+        ],
+      });
+    };
+    this.handlePrev = () => {
+      if (this.state.viewed.length <= 0) {
+        return;
+      }
+      let _viewed = cloneDeep(this.state.viewed).pop();
+      this.setState({
+        count: this.state.count - 1,
+        viewed: _viewed,
+      });
+    };
   }
+
   componentDidMount() {
     this.setState({ viewed: [this.state.storyContent[0].id] });
     setInterval(() => {
@@ -93,7 +117,10 @@ class StoryWindow extends Component {
                 );
               })}
             </div>
-            <button className="navigation_btn prev">
+            <button
+              className="navigation_btn prev"
+              onClick={() => this.handlePrev()}
+            >
               <ChevronBackOutline
                 color={"#00000"}
                 title={"Previous"}
@@ -101,7 +128,10 @@ class StoryWindow extends Component {
                 width="25px"
               />
             </button>
-            <button className="navigation_btn next">
+            <button
+              className="navigation_btn next"
+              onClick={() => this.handleNext()}
+            >
               <ChevronForwardOutline
                 color={"#00000"}
                 title={"Next"}
