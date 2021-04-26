@@ -1,0 +1,37 @@
+.window {
+    position: relative;
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    align-content: center;
+
+    .story_btn {
+        width: 200px;
+        height: 45px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        align-self: center;
+        background-color: #333;
+        color: white;
+        text-transform: uppercase;
+        font-size: 14px;
+        border-radius: 5px;
+        cursor: pointer;
+
+        &:hover {
+            background: lighten($color: #333, $amount: 5) radial-gradient(circle,
+                    transparent 1%,
+                    lighten($color: #333, $amount: 5) 1%) center/15000%;
+        }
+
+        &:active {
+            background-color: lighten($color: #333, $amount: 10);
+            background-size: 100%;
+            transition: background 0s;
+        }
+    }
+}
