@@ -8,7 +8,7 @@
     align-items: center;
     align-content: center;
 
-    .story_btn {
+    .window_btn {
         width: 200px;
         height: 45px;
         display: flex;
@@ -21,6 +21,7 @@
         font-size: 14px;
         border-radius: 5px;
         cursor: pointer;
+        margin: 10px 0;
 
         &:hover {
             background: lighten($color: #333, $amount: 5) radial-gradient(circle,
